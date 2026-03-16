@@ -18,7 +18,6 @@ export const setGovernorChoice = (selectedGovernor) => {
 
 export const setMineralChoice = (selectedMineral) => {
     transientState.mineralId = selectedMineral
-    document.dispatchEvent(new CustomEvent("stateChanged"))
     console.log(transientState)
 }
 
