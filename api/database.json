@@ -1,4 +1,146 @@
 {
-    "minerals":[],
-    "facilityMinerals": []
+    "minerals":[
+        { 
+        "id": 1, 
+        "name": "Iridium", 
+        "quantity": 
+        },
+        { 
+        "id": 2, 
+        "name": "Zircon", 
+        "quantity": 
+        },
+        { 
+        "id": 3, 
+        "name": "Sodium", 
+        "quantity": 
+        },
+        { 
+        "id": 4, 
+        "name": "Tungstite", 
+        "quantity": 
+        }
+        { 
+        "id": 5, 
+        "name": "Silicon", 
+        "quantity": 
+        },
+        { 
+        "id": 6, 
+        "name": "Gold", 
+        "quantity": 
+        }
+    ],
+    "facilities": [
+        {
+        "id": 1,
+        "name": "Mars",
+        "status": "Active"
+        },
+        {
+        "id": 2,
+        "name": "Jupiter",
+        "status": "Active"
+        },
+        {
+        "id": 3,
+        "name": "Uranus",
+        "status": "Inactive"
+        },
+        {
+        "id": 4,
+        "name": "Venus",
+        "status": "Active"
+        }
+    ],
+
+    "facilityMinerals": [
+        {
+        "id": 1,
+        "facilityId": 4,
+        "mineralId": 1
+        },
+         {
+        "id": 2,
+        "facilityId": 2,
+        "mineralId": 3
+        },
+        {
+        "id": 3,
+        "facilityId": 1,
+        "mineralId": 5
+        },
+        {
+        "id": 4,
+        "facilityId": 3,
+        "mineralId": 6
+        },
+
+    ],
+    "colonies": [
+        { 
+        "id": 1,
+        "name": "The Moon",
+        "population": "40,000 People"
+        },
+        { 
+        "id": 2,
+        "name": "Pluto",
+        "population": "2,000 People"
+
+        },
+        { 
+        "id": 3,
+        "name": "Saturn",
+        "population": "600,000 People"
+        }
+    ],
+    "governors": [
+        {
+        "id": 1,
+        "name": "Mary Doe",
+        "colonyId": 3,
+        "status": "Inactive"
+        },
+        {
+        "id": 2,
+        "name": "Marshall Smith",
+        "colonyId": 3,
+        "status": "Active"
+        },
+        {
+        "id": 3,
+        "name": "Paul Atriedes",
+        "colonyId": 1,
+        "status": "Active"
+        },
+        {
+        "id": 4,
+        "name": "Luanne James",
+        "colonyId": 2,
+        "status": "Active"
+        }
+    ],
+    "governorFacilities": [
+        {
+        "id": 1,
+        "governorId": 2,
+        "facilityId": 1
+        },
+        {
+        "id": 2,
+        "governorId": 3,
+        "facilityId": 4
+        },
+        {
+        "id": 3,
+        "governorId": 4,
+        "facilityId": 3
+        },
+        {
+        "id": 4,
+        "governorId": 1,
+        "facilityId": 2
+        },
+    ]
 }
