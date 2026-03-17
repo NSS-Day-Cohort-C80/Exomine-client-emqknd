@@ -47,7 +47,6 @@
         "isActive": true
         }
     ],
-
     "facilityMinerals": [
         {
         "id": 1,
@@ -73,7 +72,6 @@
         "mineralId": 6,
         "mineralQuantity": 25
         },
-
     ],
     "colonies": [
         { 
@@ -85,7 +83,6 @@
         "id": 2,
         "name": "Pluto",
         "population": "2,000 People"
-
         },
         { 
         "id": 3,
@@ -105,7 +102,6 @@
         "colonyId": 2,
         "mineralId": 3,
         "mineralQuantity": 0
-
         },
         { 
         "id": 3,
@@ -140,4 +136,7 @@
         "isActive": true
         }
     ],
+    "purchases": [
+        // this where orders will be added once submitted
+    ]
 }
