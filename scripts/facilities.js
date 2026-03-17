@@ -1,20 +1,26 @@
 import { setFacilityChoice } from "./TransientState.js"
 
-const getFacilities = async () => {
+export const getFacilities = async () => {
   const response = await fetch("http://localhost:8088/facilities")
-  const data = await response.json()
+  const facilities = await response.json()
 
   let facilityOptionsHTML = `<select id="facility">
         <option value="0">Choose a facility</option>`
 
-  const activeFacilities = data.filter((facility) => facility.isActive === true)
+  // TODO: need to import a governor function and build an if (function()) {}
+  if (document.querySelector("#governor").value !== 0) {
+    const activeFacilities = facilities.filter(
+      (facility) => facility.isActive === true,
+    )
 
-  activeFacilities.forEach((facility) => {
-    facilityOptionsHTML += `<option value="${facility.id}">${facility.name}</option>`
+    activeFacilities.forEach((facility) => {
+      facilityOptionsHTML += `<option value="${facility.id}">${facility.name}</option>`
     })
 
-  facilityOptionsHTML += `</select>`
-
+    facilityOptionsHTML += `</select>`
+  } else {
+    facilityOptionsHTML
+  }
   return facilityOptionsHTML
 }
 
@@ -25,5 +31,3 @@ export const handleFacilityChoice = () => {
     }
   })
 }
-
-export { getFacilities }
