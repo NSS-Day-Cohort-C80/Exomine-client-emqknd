@@ -2,55 +2,49 @@
     "minerals":[
         { 
         "id": 1, 
-        "name": "Iridium", 
-        "quantity": 
+        "name": "Iridium" 
         },
         { 
         "id": 2, 
-        "name": "Zircon", 
-        "quantity": 
+        "name": "Zircon"
         },
         { 
         "id": 3, 
-        "name": "Sodium", 
-        "quantity": 
+        "name": "Sodium"
         },
         { 
         "id": 4, 
-        "name": "Tungstite", 
-        "quantity": 
+        "name": "Tungstite"
         }
         { 
         "id": 5, 
-        "name": "Silicon", 
-        "quantity": 
+        "name": "Silicon"
         },
         { 
         "id": 6, 
-        "name": "Gold", 
-        "quantity": 
+        "name": "Gold"
         }
     ],
     "facilities": [
         {
         "id": 1,
         "name": "Mars",
-        "status": "Active"
+        "isActive": false
         },
         {
         "id": 2,
         "name": "Jupiter",
-        "status": "Active"
+        "isActive": true
         },
         {
         "id": 3,
         "name": "Uranus",
-        "status": "Inactive"
+        "isActive": true
         },
         {
         "id": 4,
         "name": "Venus",
-        "status": "Active"
+        "isActive": true
         }
     ],
 
@@ -58,22 +52,26 @@
         {
         "id": 1,
         "facilityId": 4,
-        "mineralId": 1
+        "mineralId": 1,
+        "mineralQuantity": 20
         },
          {
         "id": 2,
         "facilityId": 2,
-        "mineralId": 3
+        "mineralId": 3,
+        "mineralQuantity": 50
         },
         {
         "id": 3,
         "facilityId": 1,
-        "mineralId": 5
+        "mineralId": 5,
+        "mineralQuantity": 100
         },
         {
         "id": 4,
         "facilityId": 3,
-        "mineralId": 6
+        "mineralId": 6,
+        "mineralQuantity": 25
         },
 
     ],
@@ -95,52 +93,51 @@
         "population": "600,000 People"
         }
     ],
+     "colonyMinerals": [
+        { 
+        "id": 1,
+        "colonyId": 3,
+        "mineralId": 5,
+        "mineralQuantity": 0
+        },
+        { 
+        "id": 2,
+        "colonyId": 2,
+        "mineralId": 3,
+        "mineralQuantity": 0
+
+        },
+        { 
+        "id": 3,
+        "colonyId": 1,
+        "mineralId": 1,
+        "mineralQuantity": 0
+        }
+    ],
     "governors": [
         {
         "id": 1,
         "name": "Mary Doe",
         "colonyId": 3,
-        "status": "Inactive"
+        "isActive": false
         },
         {
         "id": 2,
         "name": "Marshall Smith",
         "colonyId": 3,
-        "status": "Active"
+        "isActive": true
         },
         {
         "id": 3,
         "name": "Paul Atriedes",
         "colonyId": 1,
-        "status": "Active"
+        "isActive": true
         },
         {
         "id": 4,
         "name": "Luanne James",
         "colonyId": 2,
-        "status": "Active"
+        "isActive": true
         }
     ],
-    "governorFacilities": [
-        {
-        "id": 1,
-        "governorId": 2,
-        "facilityId": 1
-        },
-        {
-        "id": 2,
-        "governorId": 3,
-        "facilityId": 4
-        },
-        {
-        "id": 3,
-        "governorId": 4,
-        "facilityId": 3
-        },
-        {
-        "id": 4,
-        "governorId": 1,
-        "facilityId": 2
-        },
-    ]
 }
