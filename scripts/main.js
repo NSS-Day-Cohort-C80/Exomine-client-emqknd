@@ -1,16 +1,22 @@
 // import {} from './module.js'
+import { governors, colonyMinerals } from "./governors.js"
 
 const mainContainer = document.querySelector("#container")
 
 const render = async () => {
+	const governorsHTML = await governors()
+	const colonyMineralsHTML = await colonyMinerals()
 
     const mainHTML = `
     <h1> Title </h1>
     <article>
 	    <div>
 		    <section>
-			    Choose Gov
+			    ${governorsHTML}
 		    </section>
+			<section>
+				${colonyMineralsHTML}
+			</section>
 		    <section>
 			    Choose Facility
 		    </section>
