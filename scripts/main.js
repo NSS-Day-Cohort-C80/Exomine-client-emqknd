@@ -1,5 +1,5 @@
 // import {} from './module.js'
-import { getFacilities } from "./facilities.js"
+import { getFacilities, handleFacilityChoice } from "./facilities.js"
 
 const mainContainer = document.querySelector("#container")
 
@@ -12,7 +12,7 @@ const render = async () => {
 		    <section>
 			    Choose Gov
 		    </section>
-		    <section>
+		    <section id="facility-container">
 			    ${await getFacilities()}
 		    </section>
 		    <section>
