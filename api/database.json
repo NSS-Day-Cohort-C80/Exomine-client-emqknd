@@ -1,4 +1,142 @@
 {
-    "minerals":[],
-    "facilityMinerals": []
+    "minerals":[
+        { 
+        "id": 1, 
+        "name": "Iridium" 
+        },
+        { 
+        "id": 2, 
+        "name": "Zircon"
+        },
+        { 
+        "id": 3, 
+        "name": "Sodium"
+        },
+        { 
+        "id": 4, 
+        "name": "Tungstite"
+        }
+        { 
+        "id": 5, 
+        "name": "Silicon"
+        },
+        { 
+        "id": 6, 
+        "name": "Gold"
+        }
+    ],
+    "facilities": [
+        {
+        "id": 1,
+        "name": "Mars",
+        "isActive": false
+        },
+        {
+        "id": 2,
+        "name": "Jupiter",
+        "isActive": true
+        },
+        {
+        "id": 3,
+        "name": "Uranus",
+        "isActive": true
+        },
+        {
+        "id": 4,
+        "name": "Venus",
+        "isActive": true
+        }
+    ],
+    "facilityMinerals": [
+        {
+        "id": 1,
+        "facilityId": 4,
+        "mineralId": 1,
+        "mineralQuantity": 20
+        },
+         {
+        "id": 2,
+        "facilityId": 2,
+        "mineralId": 3,
+        "mineralQuantity": 50
+        },
+        {
+        "id": 3,
+        "facilityId": 1,
+        "mineralId": 5,
+        "mineralQuantity": 100
+        },
+        {
+        "id": 4,
+        "facilityId": 3,
+        "mineralId": 6,
+        "mineralQuantity": 25
+        },
+    ],
+    "colonies": [
+        { 
+        "id": 1,
+        "name": "The Moon",
+        "population": "40,000 People"
+        },
+        { 
+        "id": 2,
+        "name": "Pluto",
+        "population": "2,000 People"
+        },
+        { 
+        "id": 3,
+        "name": "Saturn",
+        "population": "600,000 People"
+        }
+    ],
+     "colonyMinerals": [
+        { 
+        "id": 1,
+        "colonyId": 3,
+        "mineralId": 5,
+        "mineralQuantity": 0
+        },
+        { 
+        "id": 2,
+        "colonyId": 2,
+        "mineralId": 3,
+        "mineralQuantity": 0
+        },
+        { 
+        "id": 3,
+        "colonyId": 1,
+        "mineralId": 1,
+        "mineralQuantity": 0
+        }
+    ],
+    "governors": [
+        {
+        "id": 1,
+        "name": "Mary Doe",
+        "colonyId": 3,
+        "isActive": false
+        },
+        {
+        "id": 2,
+        "name": "Marshall Smith",
+        "colonyId": 3,
+        "isActive": true
+        },
+        {
+        "id": 3,
+        "name": "Paul Atriedes",
+        "colonyId": 1,
+        "isActive": true
+        },
+        {
+        "id": 4,
+        "name": "Luanne James",
+        "colonyId": 2,
+        "isActive": true
+        }
+    ],
+    "purchases": [
+        // this where orders will be added once submitted
+    ]
 }
