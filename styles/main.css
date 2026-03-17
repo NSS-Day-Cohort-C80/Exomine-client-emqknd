@@ -1,0 +1,32 @@
+#container {
+    padding: 2rem;
+}
+
+article {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+#facility-minerals-container {
+    border: 1px dashed rgb(19, 13, 13);
+    margin-top: 2rem;
+    padding: 2rem;
+    min-height: 200px;
+    text-align: center;
+}
+
+#cart-container {
+    border: 1px dashed rgb(0, 0, 0);
+    padding: 2rem;
+    min-height: 200px;
+    text-align: center;
+}
+
+#colonyMinerals-container {
+    margin-top: 10px;
+    padding: 10px;
+    min-height: 40px;
+    text-align: center;
+}
