@@ -4,21 +4,29 @@ export const getFacilities = async () => {
   const response = await fetch("http://localhost:8088/facilities")
   const facilities = await response.json()
 
-  let facilityOptionsHTML = `<select id="facility">
-        <option value="0">Choose a facility</option>`
+  let facilityOptionsHTML = `<label for="facility-options">Choose a facility</label>`
+  facilityOptionsHTML += `<select id="facility">`
+  facilityOptionsHTML += `<option value="0">Choose a facility</option>`
 
-  // TODO: need to import a governor function and build an if (function()) {}
-  if (document.querySelector("#governor").value !== "0") {
-    const activeFacilities = facilities.filter(
-      (facility) => facility.isActive === true,
-    )
+  const governorSelect = document.querySelector("#governor")
 
-    activeFacilities.forEach((facility) => {
-      facilityOptionsHTML += `<option value="${facility.id}">${facility.name}</option>`
-    })
-}
+  if (governorSelect && governorSelect.value !== "0") {
 
-    facilityOptionsHTML += `</select>`
+    const governorResponse = await fetch(`http://localhost:8088/governors/${governorSelect.value}`)
+    const governor = await governorResponse.json()
+
+    if (governor.isActive === true) {
+      const activeFacilities = facilities.filter(
+        (facility) => facility.isActive === true,
+      )
+
+      activeFacilities.forEach((facility) => {
+        facilityOptionsHTML += `<option value="${facility.id}">${facility.name}</option>`
+      })
+    }
+  }
+
+  facilityOptionsHTML += `</select>`
   return facilityOptionsHTML
 }
 
@@ -55,6 +63,7 @@ export const handleFacilityChoice = () => {
 
     if (event.target.id === "facility") {
       setFacilityChoice(event.target.value)
+      document.querySelector("#facility-minerals-container").innerHTML = await getFacilityMinerals(event.target.value)
     }
   })
 }
