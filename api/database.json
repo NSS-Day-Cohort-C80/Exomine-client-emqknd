@@ -15,7 +15,7 @@
         { 
         "id": 4, 
         "name": "Tungstite"
-        }
+        },
         { 
         "id": 5, 
         "name": "Silicon"
@@ -71,7 +71,7 @@
         "facilityId": 3,
         "mineralId": 6,
         "mineralQuantity": 25
-        },
+        }
     ],
     "colonies": [
         { 
