@@ -4,7 +4,7 @@ export const getFacilities = async () => {
   const response = await fetch("http://localhost:8088/facilities")
   const facilities = await response.json()
 
-  let facilityOptionsHTML = `<label for="facility-options">Choose a facility</label>`
+  let facilityOptionsHTML = `<label for="facility">Choose a facility</label>`
   facilityOptionsHTML += `<select id="facility">`
   facilityOptionsHTML += `<option value="0">Choose a facility</option>`
 
@@ -31,7 +31,7 @@ export const getFacilities = async () => {
 }
 
 export const getFacilityMinerals = async (facilityId) => {
-  const response = await fetch("http://localhost:8088/facilityMinerals")
+  const response = await fetch("http://localhost:8088/facilityMinerals?_expand=mineral")
   const facility = await response.json()
 
   const mineralsThatMatch = facility.filter(
@@ -46,9 +46,8 @@ export const getFacilityMinerals = async (facilityId) => {
 
   availableMinerals.forEach((facilityMineral) => {
     mineralsHTML += `<label>
-      <input type="radio" name="mineral" value="${facilityMineral.mineralId}" />
-      mineral id: ${facilityMineral.mineralId}
-    </label>`
+      <div><input type="radio" name="mineral" value="${facilityMineral.mineralId}" />
+     ${facility.mineral.name} </div> </label>`
   })
 
   return mineralsHTML
