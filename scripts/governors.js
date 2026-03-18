@@ -1,4 +1,4 @@
-import { setGovernorChoice } from "./TransientState.js"
+import { setGovernorChoice, setGovernorColonyMatch, getGovernorColonyMatch } from "./TransientState.js"
 
 const handleGovernorChoice = (changeEvent) => {
     if (changeEvent.target.id === "governor-options") {
@@ -6,11 +6,15 @@ const handleGovernorChoice = (changeEvent) => {
     }
 }
 
+// When a governor is selected, fetch that governor's colony data and save it to state
 const handleGovernorColonyMatch = async (changeEvent) => {
     if (changeEvent.target.id === "governor-options") {
         const governorId = parseInt(changeEvent.target.value)
-        const response = await fetch("http://localhost:8088/governors/${governorId}?_expand=colony")
+        // ?_expand=colony nests the full colony object onto the governor
+        const response = await fetch(`http://localhost:8088/governors/${governorId}?_expand=colony`)
         const governor = await response.json()
+        // Store the colony name in transientState and trigger a re-render
+        setGovernorColonyMatch(governor.colony.name)
     }
 }
 
@@ -45,32 +49,14 @@ export const governors = async () => {
 }
 
 export const colonyMinerals = async () => {
-    // Fetch the data for governors
-    const governorsResponse = await fetch("http://localhost:8088/governors")
-    const governorsArray = await governorsResponse.json()
 
-    // Fetch the data for colonies
-    const coloniesResponse = await fetch("http://localhost:8088/colonies")
-    const coloniesArray = await coloniesResponse.json()
-
-    // document.addEventListener("change", handleGovernorChoice)
-
+    // Listen for dropdown changes to update the selected governor's colony
     document.addEventListener("change", handleGovernorColonyMatch)
     
-    // let mineralsHTML = "<h2>Colony Name</h2>"
+    let mineralsHTML = "<h2>Inventory</h2>"
 
-    let mineralsHTML = "<h3>${governor.colony.name} Minerals</h3>"
-    
-    // If a governor's colonyId matches a colony.id, then display "colony.name Minerals" as a header
-    /* 
-    Change event - change in the dropdown
-    Create an event listener for that
-    fetch use the ?_expand query params for 
-        value="${governor.id}" match with Eric's screenshot ???
-
-    */
-
-    // mineralsHTML += "<h3>`${governor.colony.name} Minerals`</h3>"
+    // Get the saved colony name from transientState and display it
+    mineralsHTML += `<h3>${getGovernorColonyMatch()} Minerals</h3>`
     
     return mineralsHTML
 }
