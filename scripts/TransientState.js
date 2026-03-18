@@ -1,3 +1,5 @@
+import { render } from "./main.js"
+
 const transientState = {
     governorId: 0,
     facilityId: 0,
@@ -21,20 +23,61 @@ export const setMineralChoice = (selectedMineral) => {
     console.log(transientState)
 }
 
-export const purchaseMineral = () => {
-    /*
-        Does the chosen governor's colony already own some of this mineral?
-            - If yes, what should happen?
-            - If no, what should happen?
+export const purchaseMineral = async () => {
+  // Get the governor that matches the transient state governorId to get the colony they are responsible for
+  const governorResponse = await fetch(`http://localhost:8088/governors/${transientState.governorId}`)
+  const governorArray = await governorResponse.json()
+  const governor = governorArray[0]
 
-        Defining the algorithm for this method is traditionally the hardest
-        task for teams during this group project. It will determine when you
-        should use the method of POST, and when you should use PUT.
+  // Check if the colony already has this mineral. This uses the governor we found in the previous fetch and looks at their colonyId to see if there is an obj in colonyMinerals that matches. However, it is also looking to see if the mineralId in the colonyMinerals obj matches the transient state mineralId as well. If both match then it is returned as an array. 
+  const colonyMineralResponse = await fetch(`http://localhost:8088/colonyMinerals?colonyId=${governor.colonyId}&mineralId=${transientState.mineralId}`)
+  const colonyMinerals = await colonyMineralResponse.json()
 
-        Only the foolhardy try to solve this problem with code.
-    */
+  if (colonyMinerals.length === 0) {
+    // Colony doesn't have this mineral — POST a new record
+    const postOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        colonyId: governor.colonyId,
+        mineralId: transientState.mineralId,
+        mineralQuantity: 1
+      })
+    }
+    await fetch("http://localhost:8088/colonyMinerals", postOptions)
+  } 
+  
+  else {
+    // If there is a match in colonyMinerals then there will be only ONE obj in the returned array, so to select for that specific obj we need to do this:
+    const colonyMineral = colonyMinerals[0]
 
+    // Update the colony — add 1 ton. The ...colonyMineral spreads the properties in the obj so you don't have to rewrite them all
+    const putColonyOptions = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...colonyMineral,
+        mineralQuantity: colonyMineral.mineralQuantity + 1
+      })
+    }
+    await fetch(`http://localhost:8088/colonyMinerals/${colonyMineral.id}`, putColonyOptions)
 
+    // Get the facility's current mineral quantity. Gets the facilityMinerals obj that matches the transient state facilityId and mineralId selected. 
+    const facilityMineralResponse = await fetch(`http://localhost:8088/facilityMinerals?facilityId=${transientState.facilityId}&mineralId=${transientState.mineralId}`)
+    const facilityMinerals = await facilityMineralResponse.json()
+    const facilityMineral = facilityMinerals[0]
 
-    document.dispatchEvent(new CustomEvent("stateChanged"))
+    // Update the facility — subtract 1 ton
+    const putFacilityOptions = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...facilityMineral,
+        mineralQuantity: facilityMineral.mineralQuantity - 1
+      })
+    }
+    await fetch(`http://localhost:8088/facilityMinerals/${facilityMineral.id}`, putFacilityOptions)
+  }
+
+  document.querySelector("#container").innerHTML = await render()
 }
