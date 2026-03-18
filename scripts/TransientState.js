@@ -3,7 +3,8 @@ import { render } from "./main.js"
 const transientState = {
     governorId: 0,
     facilityId: 0,
-    mineralId: 0
+    mineralId: 0,
+    colonyName: ""
 }
 
 export const setFacilityChoice = (selectedFacility) => {
@@ -21,6 +22,23 @@ export const setGovernorChoice = (selectedGovernor) => {
 export const setMineralChoice = (selectedMineral) => {
     transientState.mineralId = selectedMineral
     console.log(transientState)
+}
+
+// Saves the selected governor's colony name to state and triggers a re-render
+export const setGovernorColonyMatch = (selectedColony) => {
+    transientState.colonyName = selectedColony
+    document.dispatchEvent(new CustomEvent("stateChanged"))
+    console.log(transientState)
+}
+
+// Returns the currently saved governor's name from state
+export const getGovernorChoice = () => {
+    return transientState.governorId
+}
+
+// Returns the currently saved colony name from state
+export const getGovernorColonyMatch = () => {
+    return transientState.colonyName
 }
 
 export const purchaseMineral = async () => {
