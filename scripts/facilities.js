@@ -1,5 +1,4 @@
 import { setFacilityChoice } from "./TransientState.js"
-import { getButton } from "./button.js"
 
 export const getFacilities = async () => {
   const response = await fetch("http://localhost:8088/facilities")
