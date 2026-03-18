@@ -2,7 +2,7 @@ import { setFacilityChoice } from "./TransientState.js"
 
 export const getFacilities = async () => {
   const response = await fetch("http://localhost:8088/facilities")
-  const facilities = await response.json()
+  const facilitiesArray = await response.json()
 
   let facilityOptionsHTML = `<label for="facility">Choose a facility</label>`
   facilityOptionsHTML += `<select id="facility">`
@@ -17,11 +17,11 @@ export const getFacilities = async () => {
     const governor = await governorResponse.json()
 
     if (governor.isActive === true) {
-      const activeFacilities = facilities.filter(
+      const activeFacilitiesArray = facilitiesArray.filter(
         (facility) => facility.isActive === true,
       )
 
-      activeFacilities.forEach((facility) => {
+      activeFacilitiesArray.forEach((facility) => {
         facilityOptionsHTML += `<option value="${facility.id}">${facility.name}</option>`
       })
     }
@@ -35,19 +35,19 @@ export const getFacilityMinerals = async (facilityId) => {
   const response = await fetch(
     "http://localhost:8088/facilityMinerals?_expand=mineral",
   )
-  const facility = await response.json()
+  const facilityMineralsArray = await response.json()
 
-  const mineralsThatMatch = facility.filter(
+  const matchingMineralsArray = facilityMineralsArray.filter(
     (facilityMineral) => facilityMineral.facilityId === parseInt(facilityId),
   )
 
-  const availableMinerals = mineralsThatMatch.filter(
+  const availableMineralsArray = matchingMineralsArray.filter(
     (facilityMineral) => facilityMineral.mineralQuantity !== 0,
   )
 
   let mineralsHTML = ``
 
-  availableMinerals.forEach((facilityMineral) => {
+  availableMineralsArray.forEach((facilityMineral) => {
     mineralsHTML += `<label>
   <div><input type="radio" name="mineral" value="${facilityMineral.mineralId}" />
   ${facilityMineral.mineralQuantity} tons of ${facilityMineral.mineral.name} </div> </label>`
