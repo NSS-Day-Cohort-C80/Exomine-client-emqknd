@@ -1,15 +1,6 @@
 import { setFacilityChoice } from "./TransientState.js"
 import { getButton } from "./button.js"
 
-if (event.target.id === "facility") {
-  setFacilityChoice(event.target.value)
-  document.querySelector("#facility-minerals-container").innerHTML =
-    await getFacilityMinerals(event.target.value)
-  document.querySelector("#button-container").innerHTML =
-    await getButton(event.target.value)
-}
-
-
 export const getFacilities = async () => {
   const response = await fetch("http://localhost:8088/facilities")
   const facilitiesArray = await response.json()
@@ -75,14 +66,8 @@ export const handleFacilityChoice = () => {
       setFacilityChoice(event.target.value)
       document.querySelector("#facility-minerals-container").innerHTML =
         await getFacilityMinerals(event.target.value)
+      document.querySelector("#button-container").innerHTML =
+        await getButton(event.target.value)
     }
   })
-}
-
-if (event.target.id === "facility") {
-  setFacilityChoice(event.target.value)
-  document.querySelector("#facility-minerals-container").innerHTML =
-    await getFacilityMinerals(event.target.value)
-  document.querySelector("#button-container").innerHTML =
-    await getButton(event.target.value)
 }
