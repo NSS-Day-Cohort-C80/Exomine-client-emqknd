@@ -11,8 +11,9 @@ export const getFacilities = async () => {
   const governorSelect = document.querySelector("#governor")
 
   if (governorSelect && governorSelect.value !== "0") {
-
-    const governorResponse = await fetch(`http://localhost:8088/governors/${governorSelect.value}`)
+    const governorResponse = await fetch(
+      `http://localhost:8088/governors/${governorSelect.value}`,
+    )
     const governor = await governorResponse.json()
 
     if (governor.isActive === true) {
@@ -31,15 +32,17 @@ export const getFacilities = async () => {
 }
 
 export const getFacilityMinerals = async (facilityId) => {
-  const response = await fetch("http://localhost:8088/facilityMinerals?_expand=mineral")
+  const response = await fetch(
+    "http://localhost:8088/facilityMinerals?_expand=mineral",
+  )
   const facility = await response.json()
 
   const mineralsThatMatch = facility.filter(
-    (facilityMineral) => facilityMineral.facilityId === facilityId
+    (facilityMineral) => facilityMineral.facilityId === parseInt(facilityId),
   )
 
   const availableMinerals = mineralsThatMatch.filter(
-    (facilityMineral) => facilityMineral.mineralQuantity !== 0
+    (facilityMineral) => facilityMineral.mineralQuantity !== 0,
   )
 
   let mineralsHTML = ``
@@ -47,7 +50,7 @@ export const getFacilityMinerals = async (facilityId) => {
   availableMinerals.forEach((facilityMineral) => {
     mineralsHTML += `<label>
       <div><input type="radio" name="mineral" value="${facilityMineral.mineralId}" />
-     ${facility.mineral.name} </div> </label>`
+     ${facilityMineral.mineral.name} </div> </label>`
   })
 
   return mineralsHTML
@@ -55,14 +58,15 @@ export const getFacilityMinerals = async (facilityId) => {
 
 export const handleFacilityChoice = () => {
   document.addEventListener("change", async (event) => {
-
     if (event.target.id === "governor") {
-      document.querySelector("#facility-container").innerHTML = await getFacilities()
+      document.querySelector("#facility-container").innerHTML =
+        await getFacilities()
     }
 
     if (event.target.id === "facility") {
       setFacilityChoice(event.target.value)
-      document.querySelector("#facility-minerals-container").innerHTML = await getFacilityMinerals(event.target.value)
+      document.querySelector("#facility-minerals-container").innerHTML =
+        await getFacilityMinerals(event.target.value)
     }
   })
 }
