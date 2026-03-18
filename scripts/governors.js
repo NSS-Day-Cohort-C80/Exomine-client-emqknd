@@ -1,4 +1,4 @@
-import { setGovernorChoice, setGovernorColonyMatch, getGovernorColonyMatch } from "./TransientState.js"
+import { setGovernorChoice, setGovernorColonyMatch, getGovernorColonyMatch, getGovernorChoice } from "./TransientState.js"
 
 const handleGovernorChoice = (changeEvent) => {
     if (changeEvent.target.id === "governor-options") {
@@ -32,10 +32,11 @@ export const governors = async () => {
     optionsHTML += '<select id="governor-options">'
     optionsHTML += '<option value="0">Choose a governor...</option>'
 
-   const arrayOfOptions = governorsArray.map(
+    // Dropdown options for active governors. The current selection should still display on re-render
+    const arrayOfOptions = governorsArray.map(
         (governor) => {
             if (governor.isActive == true) {
-                return `<option value="${governor.id}">${governor.name}</option>`    
+                return `<option ${getGovernorChoice() === governor.id ? 'selected' : ''} value="${governor.id}">${governor.name}</option>`    
             }
         }
     )
