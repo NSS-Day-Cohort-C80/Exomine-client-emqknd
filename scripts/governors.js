@@ -23,7 +23,7 @@ export const governors = async () => {
     const response = await fetch("http://localhost:8088/governors")
     const governorsArray = await response.json()
 
-    console.log(governors)
+    // console.log(governors)
 
     document.addEventListener("change", handleGovernorChoice)
 
@@ -41,7 +41,7 @@ export const governors = async () => {
         }
     )
 
-    console.log(arrayOfOptions)
+    // console.log(arrayOfOptions)
 
     optionsHTML += arrayOfOptions.join("")
     optionsHTML += "</select>"
