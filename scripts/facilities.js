@@ -49,8 +49,8 @@ export const getFacilityMinerals = async (facilityId) => {
 
   availableMinerals.forEach((facilityMineral) => {
     mineralsHTML += `<label>
-      <div><input type="radio" name="mineral" value="${facilityMineral.mineralId}" />
-     ${facilityMineral.mineral.name} </div> </label>`
+  <div><input type="radio" name="mineral" value="${facilityMineral.mineralId}" />
+  ${facilityMineral.mineralQuantity} tons of ${facilityMineral.mineral.name} </div> </label>`
   })
 
   return mineralsHTML
