@@ -9,7 +9,6 @@ const transientState = {
 
 export const setFacilityChoice = (selectedFacility) => {
     transientState.facilityId = selectedFacility
-    document.dispatchEvent(new CustomEvent("stateChanged"))
     console.log(transientState)
 }
 
