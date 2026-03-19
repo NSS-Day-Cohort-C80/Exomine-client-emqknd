@@ -23,7 +23,7 @@ document.addEventListener("click", handlePurchaseMineral)
 export const FinishButton = () => {
     return `
     <article class="purchase_mineral">
-    <button id='purchase-button'>Purchase Mineral</button>
+    <button id='purchase-button'>Purchase 1 Ton of Mineral</button>
     </article>
     `
 }
