@@ -1,4 +1,4 @@
-import { getMineralChoice } from "./TransientState.js"
+import { getMineralChoice, getFacility } from "./TransientState.js"
 import { handleMineralChange } from "./facilities.js"
 
 export const spaceCart = async () => {
@@ -12,8 +12,9 @@ export const spaceCart = async () => {
 
     if (getMineralChoice() !== 0) {
         // The facilityMinerals selected mineral should match the selected facility
-        const response = await fetch(`http://localhost:8088/facilityMinerals/${getMineralChoice()}?_expand=facility&_expand=mineral`)
-        const facilityMineral = await response.json()
+        const response = await fetch(`http://localhost:8088/facilityMinerals?facilityId=${getFacility()}&mineralId=${getMineralChoice()}&_expand=facility&_expand=mineral`)
+        const facilityMinerals = await response.json()
+        const facilityMineral = facilityMinerals[0]
 
         mineralsHTML += `1 ton of ${facilityMineral.mineral.name} from ${facilityMineral.facility.name}`
     }
