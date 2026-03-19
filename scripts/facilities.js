@@ -1,4 +1,4 @@
-import { setFacilityChoice } from "./TransientState.js"
+import { setFacilityChoice, setMineralChoice, getFacility } from "./TransientState.js"
 //going to add my personal comment stuff to direct thru my code logic
 
 export const getFacilities = async () => {
@@ -6,12 +6,12 @@ export const getFacilities = async () => {
   const facilitiesArray = await response.json()
   // gets the facilities (fetches) from the database and puts them into the facilitiesArray, waits for fetch to return (async/await)
 
-  let facilityOptionsHTML = `<label for="facility">Choose a facility</label>`
+  let facilityOptionsHTML = `<label for="facility">Choose a facility </label>`
   facilityOptionsHTML += `<select id="facility">`
-  facilityOptionsHTML += `<option value="0">Choose a facility </option>`
+  facilityOptionsHTML += `<option value="0">Choose a facility</option>`
   //html string starters for the dropdown, placeholder
 
-  const governorSelect = document.querySelector("#governor")
+  const governorSelect = document.querySelector("#governor-options")
 
   if (governorSelect && governorSelect.value !== "0") {
     //checks that gov dropdown exists, also checks if governor was selected
@@ -19,6 +19,7 @@ export const getFacilities = async () => {
       `http://localhost:8088/governors/${governorSelect.value}`,
     )
     const governor = await governorResponse.json()
+    console.log(governor)
     // gets the governor that was selected
     if (governor.isActive === true) {
       const activeFacilitiesArray = facilitiesArray.filter(
@@ -57,26 +58,48 @@ export const getFacilityMinerals = async (facilityId) => {
   let mineralsHTML = ``
 
   availableMineralsArray.forEach((facilityMineral) => {
-    mineralsHTML += `<input type="radio" name="mineral" value="${facilityMineral.mineralId}" />`
+    mineralsHTML += `<div><input type="radio" name="mineral" value="${facilityMineral.mineralId}" />${facilityMineral.mineralQuantity} tons of ${facilityMineral.mineral.name}</div>`
   })
   //radio button!!!! for each mineral that the facility has available. also returns the finished html string
   return mineralsHTML
 }
 
-export const handleFacilityChoice = () => {
-  document.addEventListener("change", async (event) => {
-    //watches for ANY change event on the page
-    if (event.target.id === "governor") {
-      document.querySelector("#facility-container").innerHTML =
-        await getFacilities()
-    }
-    //checks if the governor dropdown ever changes and changes the facility dropdown in turn to relate directly (specifically the active status)
 
-    if (event.target.id === "facility") {
-      setFacilityChoice(event.target.value)
-      document.querySelector("#facility-minerals-container").innerHTML =
-        await getFacilityMinerals(event.target.value)
-    }
-    //only runs if the facility dropdown was used, saves it to the transient state. getFacilityMinerals calls function that relates to the radio button for that specific facility
-  })
+
+export const handleGovernorChange = async (event) => {
+  if (event.target.id === "governor-options") {
+    document.querySelector("#facility-container").innerHTML =
+      await getFacilities()
+  }
+}
+
+export const handleMineralChange = (event) => {
+  if (event.target.name === "mineral") {
+    setMineralChoice(parseInt(event.target.value))
+  }
+}
+
+export const handleFacilityChange = async (event) => {
+  if (event.target.id === "facility") {
+    setFacilityChoice(event.target.value)
+    document.querySelector("#facility-minerals-container").innerHTML =
+      `${await facilityName()}${await getFacilityMinerals(event.target.value)}`
+  }
+}
+
+export const handleFacilityChoice = () => {
+  document.addEventListener("change", handleGovernorChange)
+  document.addEventListener("change", handleFacilityChange)
+  document.addEventListener("change", handleMineralChange)
+}
+
+export const facilityName = async () => {
+  const facilityId = getFacility()
+  let facilityHTML = `<h2>Facility Minerals</h2>`
+    if (facilityId !== 0) {
+      const response = await fetch(`http://localhost:8088/facilities/${getFacility()}`)
+      const facility = await response.json()
+      facilityHTML = `<h2>${facility.name} Facility Minerals</h2>`
+  }
+  return facilityHTML
 }
