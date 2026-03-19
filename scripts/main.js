@@ -1,6 +1,7 @@
 import { governors, colonyMinerals } from "./governors.js"
 import { getFacilities, facilityName, handleFacilityChoice } from "./facilities.js"
-import { purchaseMineral } from "./TransientState.js"
+import { FinishButton } from "./button.js"
+import { spaceCart } from "./spaceCart.js"
 
 const mainContainer = document.querySelector("#container")
 
@@ -25,16 +26,15 @@ export const render = async () => {
                 ${await colonyMinerals()}
             </section>
             <section id="cart-container">
-                <h2>Space Cart</h2>
-                <button id="purchase-btn">Purchase Mineral</button>
+                ${await spaceCart()}
+                ${FinishButton()}
             </section>
         </div>
-    </article>
-    `
+    </article>`
+    
     mainContainer.innerHTML = mainHTML
     handleFacilityChoice()
 
-    document.querySelector("#purchase-btn").addEventListener("click", purchaseMineral)
 }
 
 render()
