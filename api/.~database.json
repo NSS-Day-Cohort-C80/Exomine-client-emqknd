@@ -58,7 +58,7 @@
       "id": 2,
       "facilityId": 2,
       "mineralId": 3,
-      "mineralQuantity": 49
+      "mineralQuantity": 48
     },
     {
       "id": 3,
@@ -132,50 +132,6 @@
       "population": "600,000 People"
     }
   ],
-  "colonyMinerals": [
-    {
-      "colonyId": 2,
-      "mineralId": 3,
-      "mineralQuantity": 1,
-      "id": 1
-    },
-    {
-      "colonyId": 1,
-      "mineralId": 1,
-      "mineralQuantity": 1,
-      "id": 2
-    },
-    {
-      "colonyId": 3,
-      "mineralId": 1,
-      "mineralQuantity": 1,
-      "id": 3
-    },
-    {
-      "colonyId": 2,
-      "mineralId": 2,
-      "mineralQuantity": 1,
-      "id": 4
-    },
-    {
-      "colonyId": 1,
-      "mineralId": 2,
-      "mineralQuantity": 1,
-      "id": 5
-    },
-    {
-      "colonyId": 1,
-      "mineralId": 6,
-      "mineralQuantity": 1,
-      "id": 6
-    },
-    {
-      "colonyId": 3,
-      "mineralId": 3,
-      "mineralQuantity": 1,
-      "id": 7
-    }
-  ],
   "governors": [
     {
       "id": 1,
@@ -201,5 +157,7 @@
       "colonyId": 2,
       "isActive": true
     }
+  ],
+  "colonyMinerals": [
   ]
 }
