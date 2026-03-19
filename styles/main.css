@@ -42,11 +42,13 @@ article {
 }
 
 #cart-container {
+    margin-top: 1rem;
     border: 1px dashed rgb(0, 0, 0);
     padding: 2rem;
     min-height: 200px;
     text-align: center;
 }
+
 
 #colonyMinerals-container {
     margin-top: 10px;

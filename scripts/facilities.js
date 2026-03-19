@@ -1,4 +1,4 @@
-import { setFacilityChoice, getFacility } from "./TransientState.js"
+import { setFacilityChoice, setMineralChoice, getFacility } from "./TransientState.js"
 //going to add my personal comment stuff to direct thru my code logic
 
 export const getFacilities = async () => {
@@ -64,10 +64,18 @@ export const getFacilityMinerals = async (facilityId) => {
   return mineralsHTML
 }
 
+
+
 export const handleGovernorChange = async (event) => {
   if (event.target.id === "governor-options") {
     document.querySelector("#facility-container").innerHTML =
       await getFacilities()
+  }
+}
+
+export const handleMineralChange = (event) => {
+  if (event.target.name === "mineral") {
+    setMineralChoice(parseInt(event.target.value))
   }
 }
 
@@ -82,6 +90,7 @@ export const handleFacilityChange = async (event) => {
 export const handleFacilityChoice = () => {
   document.addEventListener("change", handleGovernorChange)
   document.addEventListener("change", handleFacilityChange)
+  document.addEventListener("change", handleMineralChange)
 }
 
 export const facilityName = async () => {

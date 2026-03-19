@@ -132,25 +132,6 @@
       "population": "600,000 People"
     }
   ],
-  "colonyMinerals": [
-    {
-      "colonyId": 1,
-      "mineralId": 0,
-      "mineralQuantity": 21,
-      "id": 1
-    },
-    {
-      "mineralId": 0,
-      "mineralQuantity": 1,
-      "id": 2
-    },
-    {
-      "colonyId": 2,
-      "mineralId": 0,
-      "mineralQuantity": 1,
-      "id": 3
-    }
-  ],
   "governors": [
     {
       "id": 1,
@@ -176,5 +157,7 @@
       "colonyId": 2,
       "isActive": true
     }
-  ]
+  ],
+  "colonyMinerals":
+  []
 }
