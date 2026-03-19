@@ -41,6 +41,10 @@ export const getGovernorColonyMatch = () => {
     return transientState.colonyName
 }
 
+export const getMineralChoice = () => {
+    return transientState.mineralId
+}
+
 export const purchaseMineral = async () => {
   // Get the governor that matches the transient state governorId to get the colony they are responsible for
   const governorResponse = await fetch(`http://localhost:8088/governors/${transientState.governorId}`)
