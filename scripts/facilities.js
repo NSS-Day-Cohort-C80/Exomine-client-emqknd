@@ -110,10 +110,10 @@ export const facilitySection = async () => {
     const facility = await response.json()
     
     return `
-      <h2>${facility.name} Facility Minerals</h2>
+      <h2>Available ${facility.name} Facility Minerals</h2>
       ${await getFacilityMinerals(facilityId)}
     `
   }
   
-  return `<h2>Facility Minerals</h2>`
+  return `<h2>Available Facility Minerals</h2>`
 }
