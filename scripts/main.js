@@ -1,5 +1,5 @@
 import { governors, colonyMinerals } from "./governors.js"
-import { getFacilities, facilityName, handleFacilityChoice } from "./facilities.js"
+import { getFacilities, facilitySection } from "./facilities.js"
 import { FinishButton } from "./button.js"
 import { spaceCart } from "./spaceCart.js"
 
@@ -18,7 +18,7 @@ export const render = async () => {
                 ${await getFacilities()}
             </section>
             <section id="facility-minerals-container">
-                ${await facilityName()}
+                ${await facilitySection()}
             </section>
         </div>
         <div class="right-col">
@@ -33,8 +33,8 @@ export const render = async () => {
     </article>`
     
     mainContainer.innerHTML = mainHTML
-    handleFacilityChoice()
-
 }
+
+document.addEventListener("stateChanged", render)
 
 render()

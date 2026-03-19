@@ -1,4 +1,6 @@
-import { setFacilityChoice, setMineralChoice, getFacility } from "./TransientState.js"
+import { setFacilityChoice, setMineralChoice, getFacility, getMineralChoice } from "./TransientState.js"
+import { spaceCart } from "./spaceCart.js"
+import { FinishButton } from "./button.js"
 //going to add my personal comment stuff to direct thru my code logic
 
 export const getFacilities = async () => {
@@ -28,7 +30,7 @@ export const getFacilities = async () => {
       //checks if governor is active, goes forward only if they are active
 
       activeFacilitiesArray.forEach((facility) => {
-        facilityOptionsHTML += `<option value="${facility.id}">${facility.name}</option>`
+        facilityOptionsHTML += `<option ${getFacility() === facility.id ? 'selected' : ''} value="${facility.id}">${facility.name}</option>`
       })
       // checks active facilities, adds option
     }
@@ -58,7 +60,7 @@ export const getFacilityMinerals = async (facilityId) => {
   let mineralsHTML = ``
 
   availableMineralsArray.forEach((facilityMineral) => {
-    mineralsHTML += `<div><input type="radio" name="mineral" value="${facilityMineral.mineralId}" />${facilityMineral.mineralQuantity} tons of ${facilityMineral.mineral.name}</div>`
+    mineralsHTML += `<div><input type="radio" name="mineral" value="${facilityMineral.mineralId}" ${getMineralChoice() === facilityMineral.mineralId ? 'checked' : ''} />${facilityMineral.mineralQuantity} tons of ${facilityMineral.mineral.name}</div>`
   })
   //radio button!!!! for each mineral that the facility has available. also returns the finished html string
   return mineralsHTML
@@ -73,9 +75,14 @@ export const handleGovernorChange = async (event) => {
   }
 }
 
-export const handleMineralChange = (event) => {
+//Updates Cart after a radio button is pressed to reflect what has been pressed 
+export const handleMineralChange = async (event) => {
   if (event.target.name === "mineral") {
     setMineralChoice(parseInt(event.target.value))
+    document.querySelector("#cart-container").innerHTML = `
+      ${await spaceCart()}
+      ${FinishButton()}
+      `
   }
 }
 
@@ -83,23 +90,30 @@ export const handleFacilityChange = async (event) => {
   if (event.target.id === "facility") {
     setFacilityChoice(event.target.value)
     document.querySelector("#facility-minerals-container").innerHTML =
-      `${await facilityName()}${await getFacilityMinerals(event.target.value)}`
+      await facilitySection()
   }
 }
 
-export const handleFacilityChoice = () => {
-  document.addEventListener("change", handleGovernorChange)
-  document.addEventListener("change", handleFacilityChange)
-  document.addEventListener("change", handleMineralChange)
-}
 
-export const facilityName = async () => {
+document.addEventListener("change", handleGovernorChange)
+document.addEventListener("change", handleFacilityChange)
+document.addEventListener("change", handleMineralChange)
+
+
+
+
+export const facilitySection = async () => {
   const facilityId = getFacility()
-  let facilityHTML = `<h2>Facility Minerals</h2>`
-    if (facilityId !== 0) {
-      const response = await fetch(`http://localhost:8088/facilities/${getFacility()}`)
-      const facility = await response.json()
-      facilityHTML = `<h2>${facility.name} Facility Minerals</h2>`
+  
+  if (facilityId !== 0) {
+    const response = await fetch(`http://localhost:8088/facilities/${facilityId}`)
+    const facility = await response.json()
+    
+    return `
+      <h2>Available ${facility.name} Facility Minerals</h2>
+      ${await getFacilityMinerals(facilityId)}
+    `
   }
-  return facilityHTML
+  
+  return `<h2>Available Facility Minerals</h2>`
 }
