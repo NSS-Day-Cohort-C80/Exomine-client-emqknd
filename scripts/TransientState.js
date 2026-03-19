@@ -45,6 +45,10 @@ export const getFacility = () => {
   return transientState.facilityId
 }
 
+export const getMineralChoice = () => {
+    return transientState.mineralId
+}
+
 export const purchaseMineral = async () => {
   console.log("transientState at purchase:", transientState)
     // Get the governor that matches the transient state governorId to get the colony they are responsible for. This fetch does not use ? (a query parameter that always returns an array), instead it returns a single object so there is no need to use [0] to select for the specific obj.
