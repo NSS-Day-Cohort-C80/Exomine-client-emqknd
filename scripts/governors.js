@@ -58,6 +58,30 @@ export const colonyMinerals = async () => {
 
     // Get the saved colony name from transientState and display it
     mineralsHTML += `<h3>${getGovernorColonyMatch()} Minerals</h3>`
+
+    //If a governor choice has been selected then we are going to get the governor obj associated with that choice   
+    if (getGovernorChoice() !== 0) {
+        const governorResponse = await fetch(`http://localhost:8088/governors/${getGovernorChoice()}`)
+        const governor = await governorResponse.json()
+
+        //Here we are finding a match between the governor we selected and an object in the colonyMinerals array based on the value of colonyId in both objects 
+        const colonyMineralResponse = await fetch(`http://localhost:8088/colonyMinerals?colonyId=${governor.colonyId}&_expand=mineral`)
+        const colonyMineralsArray = await colonyMineralResponse.json()
+
+        //If there are no objects that matched the governor.colonyId in the returned array then "No minerals purchased yet" will appear. If there are objects in that array then an unordered list will appear that shows the quantity and name of the purchased minerals
+        if (colonyMineralsArray.length === 0) {
+            mineralsHTML += `<ul>
+                <li>No minerals purchased yet</li>
+            </ul>`
+        }
+        else {
+            colonyMineralsArray.forEach((colonyMineral) => {
+                mineralsHTML += `<ul>
+                    <li>${colonyMineral.mineralQuantity} tons of ${colonyMineral.mineral.name} </li>
+                </ul>`
+            })
+        }
+    }
     
     return mineralsHTML
 }
