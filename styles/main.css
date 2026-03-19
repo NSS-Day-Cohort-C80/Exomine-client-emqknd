@@ -9,6 +9,30 @@ article {
     margin-top: 2rem;
 }
 
+* {
+  cursor: none;
+}
+
+#cursor {
+  position: fixed;
+  font-size: 24px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+.spark {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  animation: sparkle 1s ease-out forwards;
+}
+
+@keyframes sparkle {
+  0%   { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
+  100% { transform: translate(var(--dx), calc(var(--dy) + 60px)) scale(0); opacity: 0; }
+}
+
 #facility-minerals-container {
     border: 1px dashed rgb(19, 13, 13);
     margin-top: 2rem;

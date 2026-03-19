@@ -41,11 +41,14 @@ export const getGovernorColonyMatch = () => {
     return transientState.colonyName
 }
 
+export const getFacility = () => {
+  return transientState.facilityId
+}
+
 export const purchaseMineral = async () => {
   // Get the governor that matches the transient state governorId to get the colony they are responsible for
   const governorResponse = await fetch(`http://localhost:8088/governors/${transientState.governorId}`)
-  const governorArray = await governorResponse.json()
-  const governor = governorArray[0]
+  const governor = await governorResponse.json()
 
   // Check if the colony already has this mineral. This uses the governor we found in the previous fetch and looks at their colonyId to see if there is an obj in colonyMinerals that matches. However, it is also looking to see if the mineralId in the colonyMinerals obj matches the transient state mineralId as well. If both match then it is returned as an array. 
   const colonyMineralResponse = await fetch(`http://localhost:8088/colonyMinerals?colonyId=${governor.colonyId}&mineralId=${transientState.mineralId}`)
