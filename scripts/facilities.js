@@ -75,6 +75,7 @@ export const handleGovernorChange = async (event) => {
   }
 }
 
+//Updates Cart after a radio button is pressed to reflect what has been pressed 
 export const handleMineralChange = async (event) => {
   if (event.target.name === "mineral") {
     setMineralChoice(parseInt(event.target.value))

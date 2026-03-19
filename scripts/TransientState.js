@@ -1,4 +1,7 @@
-import { render } from "./main.js"
+import { colonyMinerals } from "./governors.js"
+import { facilitySection } from "./facilities.js"
+import { spaceCart } from "./spaceCart.js"
+import { FinishButton } from "./button.js"
 
 const transientState = {
     governorId: 0,
@@ -56,9 +59,9 @@ export const purchaseMineral = async () => {
     
     // Check if the colony already has this mineral. This uses the governor we found in the previous fetch and looks at their colonyId to see if there is an obj in colonyMinerals that matches. However, it is also looking to see if the mineralId in the colonyMinerals obj matches the transient state mineralId as well. If both match then it is returned as an array. 
     const colonyMineralResponse = await fetch(`http://localhost:8088/colonyMinerals?colonyId=${governor.colonyId}&mineralId=${transientState.mineralId}`)
-    const colonyMinerals = await colonyMineralResponse.json()
+    const colonyMineralsArray = await colonyMineralResponse.json()
 
-    if (colonyMinerals.length === 0) {
+    if (colonyMineralsArray.length === 0) {
         // Colony doesn't have this mineral — POST a new record
         const postOptions = {
         method: "POST",
@@ -74,7 +77,7 @@ export const purchaseMineral = async () => {
     
     else {
         // If there is a match in colonyMinerals then there will be only ONE obj in the returned array, so to select for that specific obj we need to do this:
-        const colonyMineral = colonyMinerals[0]
+        const colonyMineral = colonyMineralsArray[0]
 
         // Update the colony — add 1 ton. The ...colonyMineral spreads the properties in the obj so you don't have to rewrite them all
         const putColonyOptions = {
@@ -105,5 +108,10 @@ export const purchaseMineral = async () => {
     await fetch(`http://localhost:8088/facilityMinerals/${facilityMineral.id}`, putFacilityOptions)
     
 
-  await render()
+    document.querySelector("#colonyMinerals-container").innerHTML = await colonyMinerals()
+    document.querySelector("#facility-minerals-container").innerHTML = await facilitySection()
+    document.querySelector("#cart-container").innerHTML = `
+        ${await spaceCart()}
+        ${FinishButton()}
+`
 }
