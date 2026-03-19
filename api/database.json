@@ -52,13 +52,13 @@
       "id": 1,
       "facilityId": 4,
       "mineralId": 1,
-      "mineralQuantity": 20
+      "mineralQuantity": 18
     },
     {
       "id": 2,
       "facilityId": 2,
       "mineralId": 3,
-      "mineralQuantity": 50
+      "mineralQuantity": 48
     },
     {
       "id": 3,
@@ -70,49 +70,49 @@
       "id": 4,
       "facilityId": 3,
       "mineralId": 2,
-      "mineralQuantity": 25
+      "mineralQuantity": 24
     },
     {
       "id": 5,
       "facilityId": 4,
       "mineralId": 2,
-      "mineralQuantity": 25
+      "mineralQuantity": 21
     },
     {
       "id": 6,
       "facilityId": 2,
       "mineralId": 5,
-      "mineralQuantity": 50
+      "mineralQuantity": 49
     },
     {
       "id": 7,
       "facilityId": 3,
       "mineralId": 6,
-      "mineralQuantity": 100
+      "mineralQuantity": 98
     },
     {
       "id": 8,
       "facilityId": 4,
       "mineralId": 5,
-      "mineralQuantity": 25
+      "mineralQuantity": 23
     },
     {
       "id": 9,
       "facilityId": 3,
       "mineralId": 3,
-      "mineralQuantity": 60
+      "mineralQuantity": 57
     },
     {
       "id": 10,
       "facilityId": 2,
       "mineralId": 4,
-      "mineralQuantity": 500
+      "mineralQuantity": 498
     },
     {
       "id": 11,
       "facilityId": 4,
       "mineralId": 6,
-      "mineralQuantity": 10
+      "mineralQuantity": 2
     }
   ],
   "colonies": [
@@ -158,7 +158,6 @@
       "isActive": true
     }
   ],
-   "colonyMinerals": [
-
+  "colonyMinerals": [
   ]
 }
