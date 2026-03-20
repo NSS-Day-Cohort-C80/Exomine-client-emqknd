@@ -6,8 +6,7 @@ import { spaceCart } from "./spaceCart.js"
 const mainContainer = document.querySelector("#container")
 
 export const render = async () => {
-
-    const mainHTML = `
+  const mainHTML = `
     <h1>Solar System Mining Marketplace</h1>
 <article>
     <div class="top-row">
@@ -34,8 +33,8 @@ export const render = async () => {
         </section>
 </div>
     </article>`
-    
-    mainContainer.innerHTML = mainHTML
+
+  mainContainer.innerHTML = mainHTML
 }
 
 document.addEventListener("stateChanged", render)

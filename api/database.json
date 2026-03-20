@@ -88,7 +88,7 @@
       "id": 7,
       "facilityId": 3,
       "mineralId": 6,
-      "mineralQuantity": 98
+      "mineralQuantity": 97
     },
     {
       "id": 8,
@@ -159,5 +159,11 @@
     }
   ],
   "colonyMinerals": [
+    {
+      "colonyId": 3,
+      "mineralId": 6,
+      "mineralQuantity": 1,
+      "id": 1
+    }
   ]
 }
