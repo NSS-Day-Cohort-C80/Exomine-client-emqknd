@@ -1,5 +1,13 @@
 # Exomine
 
+Here's a gif that showcase our group project working as expected locally:
+
+![](./images/finished-working-app.gif)
+
+---
+
+## Original class instructions below
+
 This project has you building an application that lets governors of different colonies in our Solar System purchase minerals from various mining facilities that human have established.
 
 > "This project has made me realize the importance of an ERD and quality design of your data structure and how to access that data."
