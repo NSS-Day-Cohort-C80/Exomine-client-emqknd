@@ -64,7 +64,7 @@ export const colonyMinerals = async () => {
 
     //If a governor choice has been selected then we are going to get the governor obj associated with that choice   
     if (getGovernorChoice() !== 0) {
-        const governorResponse = await fetch(`http://localhost:5091/api/governors${getGovernorChoice()}`)
+        const governorResponse = await fetch(`http://localhost:5091/api/governors/${getGovernorChoice()}`)
         const governor = await governorResponse.json()
 
         //Here we are finding a match between the governor we selected and an object in the colonyMinerals array based on the value of colonyId in both objects 
