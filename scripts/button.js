@@ -4,6 +4,12 @@ const handlePurchaseMineral = async (clickEvent) => {
     if (clickEvent.target.id === "purchase-button") {
         const facilityId = document.querySelector("#facility").value
 
+        if (!facilityId || facilityId === "0") {
+          alert("Please select a facility before purchasing.");
+          return;
+        }
+        //another check
+        
         //This matches the facility selected to a facility obj in the facilities array 
         const response = await fetch(`http://localhost:5091/api/facilities/${facilityId}`)
         const facility = await response.json()

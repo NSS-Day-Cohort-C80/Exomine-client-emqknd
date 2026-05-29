@@ -11,6 +11,9 @@ const handleGovernorColonyMatch = async (changeEvent) => {
     if (changeEvent.target.id === "governor-options") {
         const governorId = parseInt(changeEvent.target.value)
         // ?_expand=colony nests the full colony object onto the governor
+        if (governorId === 0) return;
+        //another check
+        
         const response = await fetch(`http://localhost:5091/api/governors/${governorId}`)
         const governor = await response.json()
         // Store the colony name in transientState and trigger a re-render
