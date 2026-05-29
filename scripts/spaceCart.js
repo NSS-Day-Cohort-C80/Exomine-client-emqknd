@@ -22,7 +22,7 @@ export const spaceCart = async () => {
     }
     
     else {
-        mineralsHTML
+        mineralsHTML += "No mineral selected"
     }
 
     return mineralsHTML += `</div>`
