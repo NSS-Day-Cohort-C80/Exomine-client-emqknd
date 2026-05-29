@@ -12,7 +12,9 @@ export const spaceCart = async () => {
 
     if (getMineralChoice() !== 0) {
         // The facilityMinerals selected mineral should match the selected facility
-        const response = await fetch(`http://localhost:8088/facilityMinerals?facilityId=${getFacility()}&mineralId=${getMineralChoice()}&_expand=facility&_expand=mineral`)
+        const response = await fetch(
+          `http://localhost:5091/api/facilityMinerals?facilityId=${getFacility()}&mineralId=${getMineralChoice()}`,
+        );
         const facilityMinerals = await response.json()
         const facilityMineral = facilityMinerals[0]
 
@@ -20,7 +22,7 @@ export const spaceCart = async () => {
     }
     
     else {
-        mineralsHTML
+        mineralsHTML += "No mineral selected"
     }
 
     return mineralsHTML += `</div>`

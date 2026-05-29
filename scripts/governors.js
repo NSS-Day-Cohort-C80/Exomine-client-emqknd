@@ -11,7 +11,10 @@ const handleGovernorColonyMatch = async (changeEvent) => {
     if (changeEvent.target.id === "governor-options") {
         const governorId = parseInt(changeEvent.target.value)
         // ?_expand=colony nests the full colony object onto the governor
-        const response = await fetch(`http://localhost:8088/governors/${governorId}?_expand=colony`)
+        if (governorId === 0) return;
+        //another check
+        
+        const response = await fetch(`http://localhost:5091/api/governors/${governorId}`)
         const governor = await response.json()
         // Store the colony name in transientState and trigger a re-render
         setGovernorColonyMatch(governor.colony.name)
@@ -20,7 +23,7 @@ const handleGovernorColonyMatch = async (changeEvent) => {
 
 export const governors = async () => {
 
-    const response = await fetch("http://localhost:8088/governors")
+    const response = await fetch("http://localhost:5091/api/governors")
     const governorsArray = await response.json()
 
     // console.log(governors)
@@ -61,11 +64,11 @@ export const colonyMinerals = async () => {
 
     //If a governor choice has been selected then we are going to get the governor obj associated with that choice   
     if (getGovernorChoice() !== 0) {
-        const governorResponse = await fetch(`http://localhost:8088/governors/${getGovernorChoice()}`)
+        const governorResponse = await fetch(`http://localhost:5091/api/governors/${getGovernorChoice()}`)
         const governor = await governorResponse.json()
 
         //Here we are finding a match between the governor we selected and an object in the colonyMinerals array based on the value of colonyId in both objects 
-        const colonyMineralResponse = await fetch(`http://localhost:8088/colonyMinerals?colonyId=${governor.colonyId}&_expand=mineral`)
+        const colonyMineralResponse = await fetch(`http://localhost:5091/api/colonyminerals?colonyId=${governor.colonyId}`)
         const colonyMineralsArray = await colonyMineralResponse.json()
 
         //If there are no objects that matched the governor.colonyId in the returned array then "No minerals purchased yet" will appear. If there are objects in that array then an unordered list will appear that shows the quantity and name of the purchased minerals

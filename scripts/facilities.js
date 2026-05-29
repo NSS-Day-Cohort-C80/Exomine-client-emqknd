@@ -4,7 +4,7 @@ import { FinishButton } from "./button.js"
 //going to add my personal comment stuff to direct thru my code logic
 
 export const getFacilities = async () => {
-  const response = await fetch("http://localhost:8088/facilities")
+  const response = await fetch("http://localhost:5091/api/facilities")
   const facilitiesArray = await response.json()
   // gets the facilities (fetches) from the database and puts them into the facilitiesArray, waits for fetch to return (async/await)
 
@@ -18,7 +18,7 @@ export const getFacilities = async () => {
   if (governorSelect && governorSelect.value !== "0") {
     //checks that gov dropdown exists, also checks if governor was selected
     const governorResponse = await fetch(
-      `http://localhost:8088/governors/${governorSelect.value}`,
+      `http://localhost:5091/api/governors/${governorSelect.value}`,
     )
     const governor = await governorResponse.json()
     console.log(governor)
@@ -43,7 +43,7 @@ export const getFacilities = async () => {
 
 export const getFacilityMinerals = async (facilityId) => {
   const response = await fetch(
-    "http://localhost:8088/facilityMinerals?_expand=mineral",
+    "http://localhost:5091/api/facilityMinerals",
   )
   const facilityMineralsArray = await response.json()
   //gets all facility minerals and expands them to see full object so it has the actual data nested
@@ -106,7 +106,7 @@ export const facilitySection = async () => {
   const facilityId = getFacility()
   
   if (facilityId !== 0) {
-    const response = await fetch(`http://localhost:8088/facilities/${facilityId}`)
+    const response = await fetch(`http://localhost:5091/api/facilities/${facilityId}`)
     const facility = await response.json()
     
     return `
