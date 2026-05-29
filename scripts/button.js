@@ -5,7 +5,7 @@ const handlePurchaseMineral = async (clickEvent) => {
         const facilityId = document.querySelector("#facility").value
 
         //This matches the facility selected to a facility obj in the facilities array 
-        const response = await fetch(`http://localhost:8088/facilities/${facilityId}`)
+        const response = await fetch(`http://localhost:5091/api/facilities/${facilityId}`)
         const facility = await response.json()
 
         //If the facility is active then the button will run the purchaseMineral function and if it is not then an alert will pop up
